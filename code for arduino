@@ -1,0 +1,95 @@
+#include "SoftwareSerial.h"
+#include "DFRobotDFPlayerMini.h"
+
+// Use pins 2 and 3 to communicate with DFPlayer Mini
+static const uint8_t PIN_MP3_TX = 2; // Connects to module's RX 
+static const uint8_t PIN_MP3_RX = 3; // Connects to module's TX 
+SoftwareSerial comms(PIN_MP3_RX, PIN_MP3_TX);
+
+DFRobotDFPlayerMini bigMan; // create user object
+
+void setup() {
+
+  // Init USB serial port for debugging
+  Serial.begin(9600);
+  // Init serial port for DFPlayer Mini
+  comms.begin(9600);
+
+  // Start communication with DFPlayer Mini
+  if (bigMan.begin(comms)) {
+   Serial.println("comms on");
+
+    bigMan.volume(30);  // Set volume to maximum (0 to 30).
+    bigMan.play(2); // configuration sound (augh)
+  }
+
+  else {
+    Serial.println("connection failed"); // config testing
+  }
+}
+
+void loop() {
+  if (Serial.available()) {
+    switch (Serial.read()) {
+      case 'a': bigMan.play(1);
+      break;
+      case 'b': bigMan.play(3);
+      break;
+      case 'c': bigMan.play(4);
+      break;
+      case 'd': bigMan.play(5);
+      break;
+      case 'e': bigMan.play(6);
+      break;
+      case 'f': bigMan.play(7);
+      break;
+      case 'g': bigMan.play(8);
+      break;
+      case 'h': bigMan.play(9);
+      break;
+      case 'i': bigMan.play(10);
+      break;
+      case 'j': bigMan.play(11);
+      break;
+      case 'k': bigMan.play(12);
+      break;
+      case 'l': bigMan.play(13);
+      break;
+      case 'm': bigMan.play(14);
+      break;
+      case 'n': bigMan.play(15);
+      break;
+      case 'o': bigMan.play(16);
+      break;
+      case 'p': bigMan.play(17);
+      break;
+      case 'q': bigMan.play(18);
+      break;
+      case 'r': bigMan.play(19);
+      break;
+      case 's': bigMan.play(20);
+      break;
+      case 't': bigMan.play(21);
+      break;
+      case 'u': bigMan.play(22);
+      break;
+      case 'v': bigMan.play(23);
+      break;
+      case 'w': bigMan.play(24);
+      break;
+      case 'x': bigMan.play(25);
+      break;
+      case 'y': bigMan.play(26);
+      break;
+      case 'z': bigMan.play(27);
+      break;
+      case '1': bigMan.play(28); // dont play these
+      break;
+      case '2': bigMan.play(29); // dont play these
+      break;
+      case '3': bigMan.play(30); // dont play these
+      break;
+    }    
+  }
+  
+}
